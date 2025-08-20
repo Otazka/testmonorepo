@@ -4,7 +4,7 @@ RESET = \033[0m
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-LIBFT_PATH = include/libft
+LIBFT_PATH = ../libft
 MLX_PATH = include/minilibx
 
 SRC_DIR = src

@@ -1,8 +1,8 @@
 NAME = push_swap
 CC = cc 
 CFLAGS = -Wall -Wextra -Werror -g 
-LIBFT_DIR = libft
-LIBFT = ./libft/libft.a
+LIBFT_DIR = ../libft
+LIBFT = $(LIBFT_DIR)/libft.a
 RM = rm -rf
 SRCS = utils.c move.c sort.c main.c
 SRC	= $(addprefix ./src/,$(SRCS))
@@ -18,10 +18,10 @@ $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L./$(LIBFT_DIR) -lft
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIBFT_DIR) -lft
 
 $(OBJ): $(SRC)
-	@$(CC) $(CFLAGS) -c $? -I./$(LIBFT_DIR)
+	@$(CC) $(CFLAGS) -c $? -I$(LIBFT_DIR)
 	@mv *.o src
 
 clean:	

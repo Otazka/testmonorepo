@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: elsurovt <elsurovt@student.42.fr>          +#+  +:+       +#+         #
+#    By: elenasurovtseva <elenasurovtseva@studen    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/31 12:23:32 by elenasurovt       #+#    #+#              #
-#    Updated: 2024/06/01 12:01:24 by elsurovt         ###   ########.fr        #
+#    Updated: 2025/08/21 01:37:25 by elenasurovt      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC = ft_isalpha \
 	ft_strjoin \
 	ft_strtrim \
 	ft_split \
+	ft_wordcount \
 	ft_itoa \
 	ft_strmapi \
 	ft_striteri \
