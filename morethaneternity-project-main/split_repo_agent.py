@@ -327,8 +327,8 @@ class RepoSplitter:
             # Use git filter-repo to extract only the common path
             self.run_git_command([
                 'git', 'filter-repo',
-                '--path', self.config.common_path,
-                '--path-rename', f'{self.config.common_path}:',
+                '--path', f'{self.config.common_path}/',
+                '--path-rename', f'{self.config.common_path}/:',
                 '--force'
             ])
             
