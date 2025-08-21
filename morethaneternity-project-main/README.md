@@ -48,12 +48,20 @@ monorepo/
 
 1. **Clone or download this repository**
 
-2. **Install Python dependencies**:
+2. **Create and activate a virtual environment** (recommended):
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On macOS/Linux
+   # or
+   venv\Scripts\activate     # On Windows
+   ```
+
+3. **Install Python dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Install git-filter-repo**:
+4. **Install git-filter-repo**:
    ```bash
    # On macOS with Homebrew
    brew install git-filter-repo
@@ -68,9 +76,12 @@ monorepo/
    pip install git-filter-repo
    ```
 
-4. **Configure the environment**:
+5. **Configure the environment**:
    ```bash
-   # The .env file is already created - edit it with your configuration
+   # Copy the example configuration
+   cp env.example .env
+   
+   # Edit the .env file with your configuration
    nano .env
    # or
    code .env
@@ -286,13 +297,22 @@ mycompany/
 ## Project Structure
 
 ```
-aiAgent/
+morethaneternity-project-main/
 ├── split_repo_agent.py    # Main agent script
 ├── test_config.py         # Configuration validation script
 ├── example_usage.py       # Programmatic usage example
+├── force_update_repos.py  # Force update existing repositories
+├── setup_project_mode.py  # Setup script for project mode
+├── update_org_config.py   # Update organization configuration
+├── env.example            # Example environment configuration
+├── PROJECT_MODE_GUIDE.md  # Specific guide for project mode
+├── debug_agent.py         # Debug utilities
+├── run_agent.py           # Simple runner script
+├── test_agent_direct.py   # Direct testing script
 ├── requirements.txt       # Python dependencies
 ├── .env                   # Configuration file (edit this)
 ├── .gitignore            # Git ignore rules
+├── repo_splitter.log      # Log file (created during execution)
 └── README.md             # This documentation
 ```
 
@@ -338,6 +358,15 @@ The agent includes comprehensive error handling:
    - Ensure project directories exist in the repository
    - Check that `PROJECTS` variable contains valid directory names
 
+6. **Repository Already Exists**
+   - The agent will skip creation if repositories already exist
+   - Use `force_update_repos.py` to update existing repositories with new content
+   - Or delete existing repositories manually if you want to recreate them
+
+7. **Virtual Environment Issues**
+   - Always activate the virtual environment: `source venv/bin/activate`
+   - If you get module errors, reinstall dependencies: `pip install -r requirements.txt`
+
 ### Debug Mode
 
 Enable debug logging by modifying the script:
@@ -378,3 +407,43 @@ After setting up your configuration:
 The agent will create repositories based on your mode:
 - **Branch Mode**: One repository per branch + common-libs (if specified)
 - **Project Mode**: One repository per project + common-libs (if specified)
+
+## Additional Tools
+
+### Force Update Existing Repositories
+If repositories already exist and you want to update them with new content:
+```bash
+python force_update_repos.py
+```
+
+### Setup Project Mode
+Quick setup for project mode configuration:
+```bash
+python setup_project_mode.py
+```
+
+### Update Organization Configuration
+Update the organization/username in your configuration:
+```bash
+python update_org_config.py
+```
+
+## Real-World Example
+
+This agent was successfully used to split a monorepo with the following structure:
+```
+testmonorepo/
+├── libft/           # Shared library
+├── fractol/         # Project 1
+├── printf/          # Project 2  
+└── pushswap/        # Project 3
+```
+
+Into separate repositories:
+```
+Otazka/
+├── fractol-app/      # Contains only fractol/ files with history
+├── printf-app/       # Contains only printf/ files with history
+├── pushswap-app/     # Contains only pushswap/ files with history
+└── common-libs/      # Contains only libft/ files with history
+```
